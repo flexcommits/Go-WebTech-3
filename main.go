@@ -25,14 +25,20 @@ func main() {
 }
 
 func ifValid(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute, restTime int) string {
-	var workTimeHours int = endTimeHour - startTimeHour
-	var workTimeMinutes int = endTimeMinute - startTimeMinute
+	workTime := (endTimeHour-startTimeHour)*60 + (endTimeMinute - startTimeMinute)
 
-	var workTime = workTimeHours*60 + workTimeMinutes
-	if (workTime >= 481) && (restTime < 60) {
-		return "60分未満の休憩登録は不可"
-	} else if (workTime >= 361) && (restTime < 45) {
-		return "45分未満の休憩登録は不可"
+	var minRestTime int
+	switch {
+	case workTime >= 481:
+		minRestTime = 60
+	case workTime >= 361:
+		minRestTime = 45
+	default:
+		minRestTime = 0
+	}
+
+	if restTime < minRestTime {
+		return fmt.Sprintf("%d分未満の休憩登録は不可", minRestTime)
 	} else {
 		return ""
 	}
