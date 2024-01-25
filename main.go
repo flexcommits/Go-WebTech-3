@@ -28,17 +28,12 @@ func ifValid(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute, restTim
 	var workTimeHours int = endTimeHour - startTimeHour
 	var workTimeMinutes int = endTimeMinute - startTimeMinute
 
-	if workTimeMinutes < 0 {
-		workTimeMinutes = 60 + workTimeMinutes
-		workTimeHours--
-	}
 	var workTime = workTimeHours*60 + workTimeMinutes
-	if (workTime > 481) && (restTime < 60) {
+	if (workTime >= 481) && (restTime < 60) {
 		return "60分未満の休憩登録は不可"
-	}
-	if (workTime > 361) && (restTime < 45) {
+	} else if (workTime >= 361) && (restTime < 45) {
 		return "45分未満の休憩登録は不可"
+	} else {
+		return ""
 	}
-
-	return ""
 }
