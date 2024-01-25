@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 
@@ -16,13 +18,13 @@ func main() {
 	_, err := fmt.Scanf("%d:%d %d:%d %d", &startTimeHour, &startTimeMinute, &endTimeHour, &endTimeMinute, &restTime)
 
 	if err == nil {
-		fmt.Println(ifValidValue(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute, restTime))
+		fmt.Println(ifValid(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute, restTime))
 	} else {
 		fmt.Println("Enter correctly")
 	}
 }
 
-func ifValidValue(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute, restTime int) string {
+func ifValid(startTimeHour, startTimeMinute, endTimeHour, endTimeMinute, restTime int) string {
 	var workTimeHours int = endTimeHour - startTimeHour
 	var workTimeMinutes int = endTimeMinute - startTimeMinute
 
